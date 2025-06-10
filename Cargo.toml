@@ -1,0 +1,37 @@
+[package]
+name = "jikan-rs"
+version = "0.1.0"
+edition = "2021"
+authors = ["Mert Celik sw3doo@gmail.com"]
+description = "Rust library for Jikan API (MyAnimeList) - includes rate limiting and all endpoints"
+license = "MIT"
+repository = "https://github.com/sw3do/jikan-rs"
+keywords = ["anime", "manga", "myanimelist", "jikan", "api"]
+categories = ["api-bindings", "web-programming::http-client"]
+
+[dependencies]
+reqwest = { version = "0.11", features = ["json"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+chrono = { version = "0.4", features = ["serde"] }
+url = "2.4"
+urlencoding = "2.1"
+thiserror = "1.0"
+governor = { version = "0.6", optional = true }
+nonzero_ext = { version = "0.3", optional = true }
+futures = "0.3"
+log = "0.4"
+
+[dev-dependencies]
+tokio-test = "0.4"
+env_logger = "0.10"
+criterion = "0.5"
+
+[features]
+default = ["rate-limiting"]
+rate-limiting = ["governor", "nonzero_ext"]
+
+[[bench]]
+name = "benchmark"
+harness = false 
