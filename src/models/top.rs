@@ -1,8 +1,8 @@
-use serde::{Deserialize, Serialize};
-use crate::models::common::*;
 use crate::models::anime::Anime;
+use crate::models::common::*;
 use crate::models::manga::Manga;
 use crate::models::search::{Character, Person};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TopAnimeResponse {
@@ -64,4 +64,4 @@ pub struct TopReviewEntry {
 pub struct TopReviewsResponse {
     pub data: Vec<TopReview>,
     pub pagination: Pagination,
-} 
+}

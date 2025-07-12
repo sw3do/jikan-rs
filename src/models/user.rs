@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use crate::models::common::*;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct UserProfile {
@@ -56,4 +56,4 @@ pub struct UserProfileResponse {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct UserStatisticsResponse {
     pub data: UserStatistics,
-} 
+}

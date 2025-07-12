@@ -15,7 +15,7 @@ async fn main() -> Result<()> {
             println!("Status: {:?}", anime.status);
             println!("Episodes: {:?}", anime.episodes);
         }
-        Err(e) => println!("Error: {:?}", e),
+        Err(e) => println!("Error: {e:?}"),
     }
 
     match client.search_anime("Naruto", Some(1), Some(5)).await {
@@ -25,7 +25,7 @@ async fn main() -> Result<()> {
                 println!("- {} (ID: {})", anime.title, anime.mal_id);
             }
         }
-        Err(e) => println!("Search error: {:?}", e),
+        Err(e) => println!("Search error: {e:?}"),
     }
 
     match client.get_top_anime(Some(1), Some(5), None, None).await {
@@ -35,18 +35,21 @@ async fn main() -> Result<()> {
                 println!("{}. {} - Score: {:?}", i + 1, anime.title, anime.score);
             }
         }
-        Err(e) => println!("Top anime error: {:?}", e),
+        Err(e) => println!("Top anime error: {e:?}"),
     }
 
-    match client.get_season_now(Some(1), Some(5), None, None, None, None).await {
+    match client
+        .get_season_now(Some(1), Some(5), None, None, None, None)
+        .await
+    {
         Ok(response) => {
             println!("\nCurrently airing anime:");
             for anime in response.data.iter().take(3) {
                 println!("- {}", anime.title);
             }
         }
-        Err(e) => println!("Season error: {:?}", e),
+        Err(e) => println!("Season error: {e:?}"),
     }
 
     Ok(())
-} 
+}

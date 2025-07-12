@@ -1,6 +1,6 @@
-use serde::{Deserialize, Serialize};
-use crate::models::common::*;
 use crate::models::anime::Anime;
+use crate::models::common::*;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ScheduleResponse {
@@ -19,4 +19,4 @@ pub struct ScheduleDay {
     pub sunday: Option<Vec<Anime>>,
     pub other: Option<Vec<Anime>>,
     pub unknown: Option<Vec<Anime>>,
-} 
+}

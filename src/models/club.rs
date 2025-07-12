@@ -1,6 +1,6 @@
-use serde::{Deserialize, Serialize};
-use chrono::{DateTime, Utc};
 use crate::models::common::*;
+use chrono::{DateTime, Utc};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Club {
@@ -56,4 +56,4 @@ pub struct ClubStaffResponse {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ClubRelationsResponse {
     pub data: Vec<ClubRelation>,
-} 
+}

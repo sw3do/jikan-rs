@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MalUrl {
@@ -150,4 +150,4 @@ pub struct Broadcast {
     pub time: Option<String>,
     pub timezone: Option<String>,
     pub string: Option<String>,
-} 
+}

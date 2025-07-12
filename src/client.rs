@@ -46,9 +46,14 @@ impl JikanClient {
     {
         self.rate_limiter.wait_for_permit().await;
 
-        let url = format!("{}/{}", self.base_url.trim_end_matches('/'), endpoint.trim_start_matches('/'));
-        
-        let response = self.client
+        let url = format!(
+            "{}/{}",
+            self.base_url.trim_end_matches('/'),
+            endpoint.trim_start_matches('/')
+        );
+
+        let response = self
+            .client
             .get(&url)
             .header("User-Agent", "jikan-rs/0.1.0")
             .send()
@@ -63,7 +68,7 @@ impl JikanClient {
         T: DeserializeOwned,
     {
         let status = response.status();
-        
+
         if status.is_success() {
             let text = response.text().await.map_err(JikanError::Http)?;
             serde_json::from_str(&text).map_err(JikanError::Json)
@@ -71,13 +76,13 @@ impl JikanClient {
             match status.as_u16() {
                 429 => Err(JikanError::RateLimitExceeded),
                 404 => Err(JikanError::NotFound),
-                400 => Err(JikanError::ApiError { 
-                    status: status.as_u16(), 
-                    message: "Bad Request".to_string() 
+                400 => Err(JikanError::ApiError {
+                    status: status.as_u16(),
+                    message: "Bad Request".to_string(),
                 }),
-                500..=599 => Err(JikanError::ApiError { 
-                    status: status.as_u16(), 
-                    message: "Server Error".to_string() 
+                500..=599 => Err(JikanError::ApiError {
+                    status: status.as_u16(),
+                    message: "Server Error".to_string(),
                 }),
                 _ => Err(JikanError::Unknown(format!("HTTP {}", status.as_u16()))),
             }
@@ -94,4 +99,4 @@ impl JikanClient {
     pub fn check_permit(&self) -> bool {
         self.rate_limiter.check_permit()
     }
-} 
+}

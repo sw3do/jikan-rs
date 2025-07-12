@@ -1,5 +1,9 @@
 #[cfg(feature = "rate-limiting")]
-use governor::{Quota, RateLimiter, state::{InMemoryState, NotKeyed}, clock::DefaultClock};
+use governor::{
+    clock::DefaultClock,
+    state::{InMemoryState, NotKeyed},
+    Quota, RateLimiter,
+};
 #[cfg(feature = "rate-limiting")]
 use nonzero_ext::nonzero;
 #[cfg(feature = "rate-limiting")]
@@ -13,9 +17,8 @@ pub struct JikanRateLimiter {
 #[cfg(feature = "rate-limiting")]
 impl JikanRateLimiter {
     pub fn new() -> Self {
-        let quota = Quota::per_second(nonzero!(3u32))
-            .allow_burst(nonzero!(5u32));
-        
+        let quota = Quota::per_second(nonzero!(3u32)).allow_burst(nonzero!(5u32));
+
         Self {
             limiter: RateLimiter::direct(quota),
         }
@@ -24,10 +27,9 @@ impl JikanRateLimiter {
     pub fn with_custom_rate(requests_per_second: u32, burst_size: u32) -> Self {
         let requests_per_second = NonZeroU32::new(requests_per_second).unwrap_or(nonzero!(1u32));
         let burst_size = NonZeroU32::new(burst_size).unwrap_or(nonzero!(1u32));
-        
-        let quota = Quota::per_second(requests_per_second)
-            .allow_burst(burst_size);
-        
+
+        let quota = Quota::per_second(requests_per_second).allow_burst(burst_size);
+
         Self {
             limiter: RateLimiter::direct(quota),
         }
@@ -62,8 +64,7 @@ impl JikanRateLimiter {
         Self
     }
 
-    pub async fn wait_for_permit(&self) {
-    }
+    pub async fn wait_for_permit(&self) {}
 
     pub fn check_permit(&self) -> bool {
         true
@@ -75,4 +76,4 @@ impl Default for JikanRateLimiter {
     fn default() -> Self {
         Self::new()
     }
-} 
+}

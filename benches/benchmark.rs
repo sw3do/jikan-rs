@@ -11,9 +11,9 @@ fn benchmark_client_creation(c: &mut Criterion) {
 }
 
 fn benchmark_rate_limiter(c: &mut Criterion) {
-    let rt = Runtime::new().unwrap();
+    let _rt = Runtime::new().unwrap();
     let client = JikanClient::new();
-    
+
     c.bench_function("rate_limiter_check", |b| {
         b.iter(|| {
             black_box(client.check_permit());
@@ -22,4 +22,4 @@ fn benchmark_rate_limiter(c: &mut Criterion) {
 }
 
 criterion_group!(benches, benchmark_client_creation, benchmark_rate_limiter);
-criterion_main!(benches); 
+criterion_main!(benches);

@@ -1,8 +1,8 @@
 use crate::client::JikanClient;
 use crate::error::Result;
 use crate::models::anime::AnimeResponse;
-use crate::models::manga::MangaResponse;
 use crate::models::character::CharacterResponse;
+use crate::models::manga::MangaResponse;
 use crate::models::person::PersonResponse;
 use crate::models::user::UserProfileResponse;
 
@@ -31,4 +31,4 @@ impl JikanClient {
         let endpoint = "random/users";
         self.get(endpoint).await
     }
-} 
+}

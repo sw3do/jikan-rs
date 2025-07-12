@@ -4,7 +4,7 @@ use tokio::time::{sleep, Duration};
 #[tokio::main]
 async fn main() -> Result<()> {
     env_logger::init();
-    
+
     let client = JikanClient::new();
 
     println!("🎌 Jikan API Rust Library - Comprehensive Example");
@@ -19,7 +19,7 @@ async fn main() -> Result<()> {
             println!("  Status: {:?}", anime.status);
             println!("  Episodes: {:?}", anime.episodes);
         }
-        Err(e) => println!("  Error: {:?}", e),
+        Err(e) => println!("  Error: {e:?}"),
     }
 
     sleep(Duration::from_millis(500)).await;
@@ -32,7 +32,7 @@ async fn main() -> Result<()> {
             println!("  Score: {:?}", manga.score);
             println!("  Status: {:?}", manga.status);
         }
-        Err(e) => println!("  Error: {:?}", e),
+        Err(e) => println!("  Error: {e:?}"),
     }
 
     sleep(Duration::from_millis(500)).await;
@@ -44,7 +44,7 @@ async fn main() -> Result<()> {
             println!("  Name: {}", character.name);
             println!("  Favorites: {}", character.favorites);
         }
-        Err(e) => println!("  Error: {:?}", e),
+        Err(e) => println!("  Error: {e:?}"),
     }
 
     sleep(Duration::from_millis(500)).await;
@@ -56,7 +56,7 @@ async fn main() -> Result<()> {
             println!("  Name: {}", person.name);
             println!("  Favorites: {}", person.favorites);
         }
-        Err(e) => println!("  Error: {:?}", e),
+        Err(e) => println!("  Error: {e:?}"),
     }
 
     sleep(Duration::from_millis(500)).await;
@@ -68,7 +68,7 @@ async fn main() -> Result<()> {
                 println!("  - {} (ID: {})", anime.title, anime.mal_id);
             }
         }
-        Err(e) => println!("  Error: {:?}", e),
+        Err(e) => println!("  Error: {e:?}"),
     }
 
     sleep(Duration::from_millis(500)).await;
@@ -80,19 +80,22 @@ async fn main() -> Result<()> {
                 println!("  {}. {} - Score: {:?}", i + 1, anime.title, anime.score);
             }
         }
-        Err(e) => println!("  Error: {:?}", e),
+        Err(e) => println!("  Error: {e:?}"),
     }
 
     sleep(Duration::from_millis(500)).await;
 
     println!("\n🌸 Current Season:");
-    match client.get_season_now(Some(1), Some(3), None, None, None, None).await {
+    match client
+        .get_season_now(Some(1), Some(3), None, None, None, None)
+        .await
+    {
         Ok(response) => {
             for anime in response.data {
                 println!("  - {}", anime.title);
             }
         }
-        Err(e) => println!("  Error: {:?}", e),
+        Err(e) => println!("  Error: {e:?}"),
     }
 
     sleep(Duration::from_millis(500)).await;
@@ -104,7 +107,7 @@ async fn main() -> Result<()> {
             println!("  Title: {}", anime.title);
             println!("  Score: {:?}", anime.score);
         }
-        Err(e) => println!("  Error: {:?}", e),
+        Err(e) => println!("  Error: {e:?}"),
     }
 
     sleep(Duration::from_millis(500)).await;
@@ -116,7 +119,7 @@ async fn main() -> Result<()> {
                 println!("  - {}", anime.title);
             }
         }
-        Err(e) => println!("  Error: {:?}", e),
+        Err(e) => println!("  Error: {e:?}"),
     }
 
     sleep(Duration::from_millis(500)).await;
@@ -125,12 +128,15 @@ async fn main() -> Result<()> {
     match client.get_watch_recent_episodes(Some(1)).await {
         Ok(response) => {
             for episode in response.data.iter().take(3) {
-                println!("  - {}", episode.title.as_ref().unwrap_or(&"No title".to_string()));
+                println!(
+                    "  - {}",
+                    episode.title.as_ref().unwrap_or(&"No title".to_string())
+                );
             }
         }
-        Err(e) => println!("  Error: {:?}", e),
+        Err(e) => println!("  Error: {e:?}"),
     }
 
     println!("\n✅ All tests completed!");
     Ok(())
-} 
+}

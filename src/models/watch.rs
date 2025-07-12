@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use crate::models::common::*;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WatchEpisode {
@@ -40,4 +40,4 @@ pub struct WatchEpisodesResponse {
 pub struct WatchPromosResponse {
     pub data: Vec<WatchPromo>,
     pub pagination: Option<WatchPagination>,
-} 
+}

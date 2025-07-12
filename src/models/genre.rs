@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use crate::models::common::*;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GenreResponse {
@@ -14,4 +14,4 @@ pub struct AnimeGenresResponse {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MangaGenresResponse {
     pub data: Vec<Genre>,
-} 
+}

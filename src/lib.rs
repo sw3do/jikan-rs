@@ -1,7 +1,7 @@
 pub mod client;
 pub mod endpoints;
-pub mod models;
 pub mod error;
+pub mod models;
 pub mod rate_limiter;
 
 pub use client::JikanClient;
@@ -28,4 +28,4 @@ mod tests {
         let client = JikanClient::with_rate_limit(1, 1);
         assert!(client.check_permit());
     }
-} 
+}

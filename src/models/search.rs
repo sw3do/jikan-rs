@@ -1,7 +1,7 @@
-use serde::{Deserialize, Serialize};
-use crate::models::common::*;
 use crate::models::anime::Anime;
+use crate::models::common::*;
 use crate::models::manga::Manga;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AnimeSearchResponse {
@@ -85,4 +85,4 @@ pub struct Club {
     pub created: Option<String>,
     #[serde(rename = "type")]
     pub club_type: String,
-} 
+}

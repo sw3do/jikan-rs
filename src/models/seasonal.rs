@@ -1,6 +1,6 @@
-use serde::{Deserialize, Serialize};
-use crate::models::common::*;
 use crate::models::anime::Anime;
+use crate::models::common::*;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SeasonalAnimeResponse {
@@ -33,4 +33,4 @@ pub struct SeasonArchiveResponse {
 pub struct SeasonArchiveYear {
     pub year: u16,
     pub seasons: Vec<String>,
-} 
+}
