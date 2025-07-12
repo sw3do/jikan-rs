@@ -6,8 +6,14 @@ authors = ["Mert Celik sw3doo@gmail.com"]
 description = "Rust library for Jikan API (MyAnimeList) - includes rate limiting and all endpoints"
 license = "MIT"
 repository = "https://github.com/sw3do/jikan-rs"
+documentation = "https://sw3do.github.io/jikan-rs"
+homepage = "https://github.com/sw3do/jikan-rs"
 keywords = ["anime", "manga", "myanimelist", "jikan", "api"]
 categories = ["api-bindings", "web-programming::http-client"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
 
 [dependencies]
 reqwest = { version = "0.11", features = ["json"] }
